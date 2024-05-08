@@ -1,0 +1,41 @@
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build output directories
+dist/
+out/
+build/
+
+# Environment variables file (if using dotenv)
+.env
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Testing
+coverage/
+
+# Editor-specific backup files
+*~
