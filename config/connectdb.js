@@ -12,12 +12,14 @@ export const connectDb = async (x) => {
     entities: [User],
     synchronize: true,
   });
-  AppDataSource.initialize()
+  let appData = AppDataSource.initialize()
     .then((y) => {
       console.log(`Data Source has been initialized at port! ${x.PORTDB}`);
-      return y;
+      let userRepository = y.getRepository("User");
+      return { userRepository: userRepository };
     })
     .catch((err) => {
       console.error("Error during Data Source initialization", err);
     });
+  return appData;
 };
