@@ -4,7 +4,7 @@ import { UserController } from "../controllers/userController.js";
 
 //Public Routes
 router.post("/register", UserController.userRegistration);
+router.post("/login", UserController.userLogin);
 
-//Private Routes
-
+//Private RoutesS
 export default router;
