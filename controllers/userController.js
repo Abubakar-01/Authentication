@@ -69,13 +69,11 @@ export class UserController {
               process.env.JWT_SECRET_KEY,
               { expiresIn: "30m" }
             );
-            res
-              .status(200)
-              .send({
-                status: "Success",
-                message: "Logged In Successfully",
-                token: token,
-              });
+            res.status(200).send({
+              status: "Success",
+              message: "Logged In Successfully",
+              token: token,
+            });
           } else {
             res.send({
               status: "failed",
@@ -93,6 +91,36 @@ export class UserController {
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  //Static Method for Change User Password
+  static changeUserPassword = async (req, res) => {
+    const { password, password_confirmation } = req.body;
+    if (password && password_confirmation) {
+      if (password === password_confirmation) {
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(password, salt);
+        let user = await dataSource.userRepository.save({
+          ...req.user,
+          password: hashPassword,
+        });
+        res.send({
+          status: "Success",
+          message: "Password saved successfully",
+        });
+      } else {
+        res.send({
+          status: "failed",
+          message:
+            "Passwords in both password and confirm password should be same",
+        });
+      }
+    } else {
+      res.send({
+        status: "failed",
+        message: "All fields are required",
+      });
     }
   };
 }
